@@ -65,21 +65,9 @@ Do not add:
 - edits to the original monolithic RE-ARC task files for ARC2 work
 
 **Build And Outputs**
-Use the `arc` conda env and disable wandb:
+Use the `arc` conda env:
 
-```bash
-conda run --no-capture-output -n arc python -m arc2.shared.build --task TASK_ID --n-examples 1000
-```
-
-This shared command should generate:
-- `arc2/artifacts/TASK_ID/task.json`
-- `arc2/artifacts/TASK_ID/examples/000.json`, ...
-- `arc2/artifacts/TASK_ID/previews/originals.png`
-- `arc2/artifacts/TASK_ID/previews/preview_01.png`
-- `arc2/artifacts/TASK_ID/previews/preview_02.png`
-- `arc2/artifacts/TASK_ID/previews/preview_03.png`
-
-If needed, discovered ARC2 tasks can be checked with:
+If needed, confirm that the task package is discoverable:
 
 ```bash
 conda run --no-capture-output -n arc python - <<'PY'
@@ -88,12 +76,36 @@ print(list_task_ids())
 PY
 ```
 
+Before building, verify the verifier on the official examples:
+
+```bash
+conda run --no-capture-output -n arc python -m arc2.shared.verify --task TASK_ID
+```
+
+Then build the generated artifacts:
+
+```bash
+conda run --no-capture-output -n arc python -m arc2.shared.build --task TASK_ID --n-examples 1000
+```
+
+The build command should generate:
+- `arc2/artifacts/TASK_ID/task.json`
+- `arc2/artifacts/TASK_ID/examples/000.json`, ...
+- `arc2/artifacts/TASK_ID/previews/originals.png`
+- `arc2/artifacts/TASK_ID/previews/preview_01.png`
+- `arc2/artifacts/TASK_ID/previews/preview_02.png`
+- `arc2/artifacts/TASK_ID/previews/preview_03.png`
+
 **Quality Bar**
 This should look and feel like original RE-ARC code, not custom glue code.
 
 Verifier requirements:
 - Use original RE-ARC verifier style: `x0`, `x1`, `x2`, ...
 - Use DSL composition, not ad hoc imperative solver code unless unavoidable
+- Default to a self-contained `verifier.py`
+- Do not import from `helpers.py` in the verifier unless the imported helper is also used constructively by `generator.py`
+- Do not hide the solver in `helpers.py` as `solve_TASKID` or make `verifier.py` a thin wrapper around helper code
+- Treat `verifiers.py` as the style reference for verifier structure, not previously generated `arc2/tasks`
 
 Generator requirements:
 - Match original RE-ARC generator style
@@ -119,9 +131,9 @@ Avoid these failure modes:
 Minimum workflow:
 1. Read `dsl_quickref.md`, the official puzzle, and the optional summary hint.
 2. Decide whether the summary hint is trustworthy. If not, discard it and record that in `notes.md`.
-3. Inspect nearby RE-ARC and ARC2 code for style.
+3. Inspect RE-ARC code for style; use ARC2 code for packaging/infrastructure only, not as verifier-style precedent.
 4. Infer the rule and characterize the input distribution.
-5. Implement `verify_TASKID` and validate it on the official examples.
+5. Implement `verify_TASKID` and validate it on the official examples with `python -m arc2.shared.verify --task TASK_ID`.
 6. Implement `generate_TASKID`.
 7. Wire `__init__.py`.
 8. Run the shared builder.
