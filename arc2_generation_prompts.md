@@ -20,9 +20,10 @@ Before writing code:
 1. Read `dsl_quickref.md` fully. This is the required high-level summary of `dsl.py`.
 2. Then open `dsl.py` itself for any primitive you actually plan to use, especially the less obvious geometry/object primitives.
 3. Read the official puzzle json at `arc2_puzzles/data/training/TASK_ID.json`.
-4. Look up `TASK_ID` in `arc2_sonnet45_summary.jsonl` and treat the matching `summary` text as an untrusted hint only.
+4. Look up `TASK_ID` in `arc2_sonnet45_summary.jsonl` and `arc2_opus46_summary.json` and treat the matching `summary` text as an untrusted hint only.
 
-Hint policy for `arc2_sonnet45_summary.jsonl`:
+Hint policy for `arc2_sonnet45_summary.jsonl` and `arc2_opus46_summary.json`:
+- You should read both. `arc2_opus46_summary.json` should be more "correct" in general, if they conflict with each other.
 - If the summary seems consistent with the official examples, you may use it as a starting hypothesis.
 - If it seems wrong, incomplete, or misleading, discard it and work out the rule yourself.
 - If you discard it, document the mismatch and your corrected understanding in `arc2/tasks/task_TASKID/notes.md`.
@@ -125,7 +126,7 @@ Before implementing, reason concretely about:
 Avoid these failure modes:
 - defaulting to generic polyomino or “Tetris” noise without evidence
 - inventing a high-level DSL for one task
-- trusting the `arc2_sonnet45_summary.jsonl` hint without checking it against the official examples
+- trusting the `arc2_sonnet45_summary.jsonl` or `arc2_opus46_summary.json` hint without checking it against the official examples
 - stopping after code is written without generating and checking artifacts
 
 Minimum workflow:
