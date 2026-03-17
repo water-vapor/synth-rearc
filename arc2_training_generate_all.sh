@@ -11,9 +11,16 @@ if [[ ! -f "$TASK_LIST" ]]; then
   exit 1
 fi
 
-while IFS= read -r task_id; do
+START=${1:-1}
+END=${2:-$(wc -l < "$TASK_LIST")}
+TOTAL=$((END - START + 1))
+DONE=0
+
+sed -n "${START},${END}p" "$TASK_LIST" | while IFS= read -r task_id; do
   if [[ -z "$task_id" ]]; then
     continue
   fi
   python arc2_agentic_generation.py "$task_id"
-done < "$TASK_LIST"
+  DONE=$((DONE + 1))
+  echo "$DONE/$TOTAL"
+done
