@@ -99,7 +99,6 @@ Omit `--task` to verify generated examples for all discovered ARC2 tasks.
 
 The build command should generate:
 - `arc2/artifacts/TASK_ID/task.json`
-- `arc2/artifacts/TASK_ID/examples/000.json`, ...
 - `arc2/artifacts/TASK_ID/previews/originals.png`
 - `arc2/artifacts/TASK_ID/previews/preview_01.png`
 - `arc2/artifacts/TASK_ID/previews/preview_02.png`
@@ -147,7 +146,7 @@ Minimum workflow:
 7. Wire `__init__.py`.
 8. Run the shared builder.
 9. Run `./arc2_verify_generated_all.sh --task TASK_ID`.
-10. Check that `task.json`, per-example jsons, `originals.png`, and the 3 preview sheets exist.
+10. Check that `task.json`, `originals.png`, and the 3 preview sheets exist.
 11. Open at least one generated preview image and sanity-check it visually.
 12. If the visuals are off-distribution, revise and rebuild.
 

@@ -21,10 +21,5 @@ def task_artifacts_dir(task_id: str) -> Path:
     return ARTIFACTS_ROOT / task_id
 
 
-def examples_dir(task_id: str) -> Path:
-    return task_artifacts_dir(task_id) / "examples"
-
-
 def previews_dir(task_id: str) -> Path:
     return task_artifacts_dir(task_id) / "previews"
-

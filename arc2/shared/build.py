@@ -4,11 +4,12 @@ import argparse
 import json
 from pathlib import Path
 from random import seed as set_seed
+import shutil
 
 from utils import is_grid
 
 from arc2.shared.discovery import TaskSpec, iter_task_specs, load_task_spec
-from arc2.shared.paths import examples_dir, previews_dir
+from arc2.shared.paths import previews_dir
 from arc2.shared.render import load_task_examples, save_example_sheet, save_preview_batches
 
 
@@ -50,18 +51,14 @@ def generate_verified_examples(
 
 def save_examples(spec: TaskSpec, examples: list[dict]) -> tuple[Path, Path]:
     task_artifacts_dir = spec.artifacts_dir
-    task_examples_dir = examples_dir(spec.task_id)
     task_previews_dir = previews_dir(spec.task_id)
     task_artifacts_dir.mkdir(parents=True, exist_ok=True)
-    task_examples_dir.mkdir(parents=True, exist_ok=True)
     task_previews_dir.mkdir(parents=True, exist_ok=True)
 
-    _clear_files(task_examples_dir, "*.json")
+    legacy_examples_dir = task_artifacts_dir / "examples"
+    if legacy_examples_dir.exists():
+        shutil.rmtree(legacy_examples_dir)
     _clear_files(task_previews_dir, "*.png")
-
-    for idx, example in enumerate(examples):
-        with open(task_examples_dir / f"{idx:03d}.json", "w") as fp:
-            json.dump(example, fp)
 
     task_path = task_artifacts_dir / "task.json"
     with open(task_path, "w") as fp:

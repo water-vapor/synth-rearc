@@ -1,36 +1,22 @@
 from __future__ import annotations
 
 import argparse
-import json
 from pathlib import Path
 
 from arc2.shared.discovery import TaskSpec, iter_task_specs, load_task_spec
-from arc2.shared.paths import examples_dir
+from arc2.shared.render import load_task_examples
 from arc2.shared.verify import verify_examples
 
 
 def load_generated_examples(path: Path) -> tuple[list[dict], list[str]]:
-    if not path.exists():
-        raise FileNotFoundError(path)
-    if not path.is_dir():
-        raise NotADirectoryError(path)
-
-    example_paths = sorted(path.glob("*.json"))
-    if not example_paths:
-        raise FileNotFoundError(f"no generated example json files found in {path}")
-
-    examples: list[dict] = []
-    labels: list[str] = []
-    for example_path in example_paths:
-        with open(example_path, "r") as fp:
-            examples.append(json.load(fp))
-        labels.append(example_path.name)
+    examples = load_task_examples(path)
+    labels = [f"task.json[{idx:03d}]" for idx in range(len(examples))]
     return examples, labels
 
 
 def verify_generated_examples(spec: TaskSpec) -> dict[str, object]:
-    task_examples_dir = examples_dir(spec.task_id)
-    examples, labels = load_generated_examples(task_examples_dir)
+    task_path = spec.artifacts_dir / "task.json"
+    examples, labels = load_generated_examples(task_path)
     return verify_examples(spec, examples, example_labels=labels)
 
 
