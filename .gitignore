@@ -214,3 +214,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ARC2 generated artifact duplicates
+/arc2/artifacts/*/examples/
