@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Sequence
 
 from utils import format_example
 
@@ -8,24 +9,32 @@ from arc2.shared.discovery import TaskSpec, iter_task_specs, load_task_spec
 from arc2.shared.render import load_task_examples
 
 
-def verify_official_examples(spec: TaskSpec) -> dict[str, object]:
-    if spec.reference_task_path is None:
-        raise ValueError(f"task {spec.task_id} has no REFERENCE_TASK_PATH")
+def verify_examples(
+    spec: TaskSpec,
+    examples: list[dict],
+    *,
+    example_labels: Sequence[str] | None = None,
+) -> dict[str, object]:
+    if example_labels is not None and len(example_labels) != len(examples):
+        raise ValueError("example_labels must match examples length")
 
-    examples = load_task_examples(spec.reference_task_path)
     failures: list[str] = []
     for idx, example in enumerate(examples):
+        label = example_labels[idx] if example_labels is not None else f"example {idx:02d}"
+        if "input" not in example:
+            failures.append(f"{label}: missing input")
+            continue
         if "output" not in example:
-            failures.append(f"example {idx:02d}: missing output")
+            failures.append(f"{label}: missing output")
             continue
         formatted = format_example(example)
         try:
             actual = spec.verifier(formatted["input"])
         except Exception as exc:
-            failures.append(f"example {idx:02d}: {type(exc).__name__}: {exc}")
+            failures.append(f"{label}: {type(exc).__name__}: {exc}")
             continue
         if actual != formatted["output"]:
-            failures.append(f"example {idx:02d}: output mismatch")
+            failures.append(f"{label}: output mismatch")
 
     return {
         "task_id": spec.task_id,
@@ -33,6 +42,14 @@ def verify_official_examples(spec: TaskSpec) -> dict[str, object]:
         "passed": len(examples) - len(failures),
         "failures": failures,
     }
+
+
+def verify_official_examples(spec: TaskSpec) -> dict[str, object]:
+    if spec.reference_task_path is None:
+        raise ValueError(f"task {spec.task_id} has no REFERENCE_TASK_PATH")
+
+    examples = load_task_examples(spec.reference_task_path)
+    return verify_examples(spec, examples)
 
 
 def parse_args() -> argparse.Namespace:

@@ -13,26 +13,21 @@ PATCH_TO_STEP_E6DE6E8F = {
 
 
 def verify_e6de6e8f(I: Grid) -> Grid:
-    x0 = mostcolor(I)
-    x1 = other(palette(I), x0)
-    x2 = (x0 + ONE) % TEN
-    x3 = (x0 + TWO) % TEN
-    x4 = branch(equality(x2, x1), x3, x2)
-    x5 = objects(I, T, F, F)
-    x6 = colorfilter(x5, x0)
-    x7 = order(x6, leftmost)
-    x8 = apply(compose(normalize, toindices), x7)
-    x9 = tuple(PATCH_TO_STEP_E6DE6E8F[patch] for patch in x8)
-    x10 = [THREE]
-    for x11 in x9:
-        x10.append(x10[-ONE] + x11)
-        if x11 == ZERO:
-            x10.append(x10[-ONE])
-    x12 = tuple(x10[:EIGHT])
-    x13 = canvas(x1, (EIGHT, SEVEN))
-    x14 = fill(x13, x4, initset((ZERO, THREE)))
-    x15 = x14
-    for x16, (x17, x18) in enumerate(zip(x12, x12[ONE:]), start=ONE):
-        x19 = connect((x16, x17), (x16, x18))
-        x15 = fill(x15, x0, x19)
-    return x15
+    x0 = objects(I, T, F, F)
+    x1 = colorfilter(x0, TWO)
+    x2 = order(x1, leftmost)
+    x3 = apply(compose(normalize, toindices), x2)
+    x4 = tuple(PATCH_TO_STEP_E6DE6E8F[patch] for patch in x3)
+    x5 = [THREE]
+    for x6 in x4:
+        x5.append(x5[-ONE] + x6)
+        if x6 == ZERO:
+            x5.append(x5[-ONE])
+    x7 = tuple(x5[:EIGHT])
+    x8 = canvas(ZERO, (EIGHT, SEVEN))
+    x9 = fill(x8, THREE, initset((ZERO, THREE)))
+    x10 = x9
+    for x11, (x12, x13) in enumerate(zip(x7, x7[ONE:]), start=ONE):
+        x14 = connect((x11, x12), (x11, x13))
+        x10 = fill(x10, TWO, x14)
+    return x10

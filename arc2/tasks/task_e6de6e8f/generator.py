@@ -1,7 +1,8 @@
+from itertools import product as iterproduct
+
 from arc2.core import *
 
 from .helpers import (
-    marker_color_e6de6e8f,
     render_input_e6de6e8f,
     render_output_e6de6e8f,
 )
@@ -29,26 +30,38 @@ def _candidate_steps_e6de6e8f() -> Tuple:
     return tuple(choices)
 
 
+def _candidate_gaps_e6de6e8f() -> Tuple:
+    base = (ZERO, ONE, ONE, ONE, ONE, ZERO)
+    choices = []
+    extras = interval(ZERO, FIVE, ONE)
+    for addition in iterproduct(extras, repeat=6):
+        # Keep the strip close to the official 12-column layout while allowing
+        # enough black spacing variation to build a large unique sample set.
+        if sum(addition) > FOUR:
+            continue
+        gaps = tuple(base[index] + addition[index] for index in range(6))
+        choices.append(gaps)
+    return tuple(choices)
+
+
 CANDIDATE_STEPS_E6DE6E8F = _candidate_steps_e6de6e8f()
+CANDIDATE_GAPS_E6DE6E8F = _candidate_gaps_e6de6e8f()
 
 
 def generate_e6de6e8f(
     diff_lb: float,
     diff_ub: float,
 ) -> dict:
-    colors = interval(ZERO, TEN, ONE)
     while True:
-        bg_color = choice(colors)
-        path_color = choice(remove(bg_color, colors))
-        marker_color = marker_color_e6de6e8f(path_color, bg_color)
         steps = choice(CANDIDATE_STEPS_E6DE6E8F)
-        gi = render_input_e6de6e8f(steps, bg_color, path_color)
+        gaps = choice(CANDIDATE_GAPS_E6DE6E8F)
+        gi = render_input_e6de6e8f(steps, ZERO, TWO, gaps)
         walk = [THREE]
         for step in steps:
             walk.append(walk[-ONE] + step)
             if step == ZERO:
                 walk.append(walk[-ONE])
-        go = render_output_e6de6e8f(tuple(walk[:EIGHT]), bg_color, path_color, marker_color)
+        go = render_output_e6de6e8f(tuple(walk[:EIGHT]), ZERO, TWO, THREE)
         if gi == go:
             continue
         return {"input": gi, "output": go}

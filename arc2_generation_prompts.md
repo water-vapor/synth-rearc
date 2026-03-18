@@ -89,6 +89,14 @@ Then build the generated artifacts:
 conda run --no-capture-output -n arc python -m arc2.shared.build --task TASK_ID --n-examples 1000
 ```
 
+Then verify the generated examples with the convenience wrapper:
+
+```bash
+./arc2_verify_generated_all.sh --task TASK_ID
+```
+
+Omit `--task` to verify generated examples for all discovered ARC2 tasks.
+
 The build command should generate:
 - `arc2/artifacts/TASK_ID/task.json`
 - `arc2/artifacts/TASK_ID/examples/000.json`, ...
@@ -138,9 +146,10 @@ Minimum workflow:
 6. Implement `generate_TASKID`.
 7. Wire `__init__.py`.
 8. Run the shared builder.
-9. Check that `task.json`, per-example jsons, `originals.png`, and the 3 preview sheets exist.
-10. Open at least one generated preview image and sanity-check it visually.
-11. If the visuals are off-distribution, revise and rebuild.
+9. Run `./arc2_verify_generated_all.sh --task TASK_ID`.
+10. Check that `task.json`, per-example jsons, `originals.png`, and the 3 preview sheets exist.
+11. Open at least one generated preview image and sanity-check it visually.
+12. If the visuals are off-distribution, revise and rebuild.
 
 Validation gates:
 - official examples: exact verifier match
