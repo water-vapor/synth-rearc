@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` was the useful starting point, but it was incomplete. The official examples do not project solid lines from the tip to the border; they project the tip color every other cell, and only the outer border itself is painted solidly in that color.
+
+`arc2_sonnet45_summary.jsonl` was too vague to rely on directly. The official rule is not just “marker colors trigger lines”; each connected multicolor object is a pointer, the unique least-frequent cell is its tip, the tip’s bounding-box edge determines the outward direction, the interior projection is dotted with step 2, and only border-line intersections are turned into `0`.

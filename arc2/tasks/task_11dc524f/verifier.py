@@ -1,0 +1,31 @@
+from arc2.core import *
+
+
+def verify_11dc524f(I: Grid) -> Grid:
+    x0 = fgpartition(I)
+    x1 = colorfilter(x0, TWO)
+    x2 = colorfilter(x0, FIVE)
+    x3 = first(x1)
+    x4 = first(x2)
+    x5 = gravitate(x3, x4)
+    x6 = shift(x3, x5)
+    x7 = first(x5)
+    x8 = equality(x7, ZERO)
+    x9 = branch(x8, vmirror, hmirror)
+    x10 = x9(x6)
+    x11 = last(x5)
+    x12 = sign(x11)
+    x13 = width(x6)
+    x14 = multiply(x12, x13)
+    x15 = astuple(ZERO, x14)
+    x16 = sign(x7)
+    x17 = height(x6)
+    x18 = multiply(x16, x17)
+    x19 = astuple(x18, ZERO)
+    x20 = branch(x8, x15, x19)
+    x21 = shift(x10, x20)
+    x22 = recolor(FIVE, x21)
+    x23 = canvas(SEVEN, shape(I))
+    x24 = paint(x23, x6)
+    x25 = paint(x24, x22)
+    return x25
