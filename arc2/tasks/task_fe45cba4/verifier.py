@@ -1,0 +1,31 @@
+from arc2.core import *
+
+
+def verify_fe45cba4(I: Grid) -> Grid:
+    x0 = objects(I, T, F, T)
+    x1 = mostcolor(I)
+    x2 = palette(I)
+    x3 = remove(x1, x2)
+    x4 = totuple(x3)
+    x5 = first(x4)
+    x6 = last(x4)
+    x7 = colorfilter(x0, x5)
+    x8 = size(x7)
+    x9 = equality(x8, TWO)
+    x10 = branch(x9, x5, x6)
+    x11 = colorfilter(x0, x10)
+    x12 = argmax(x11, rightmost)
+    x13 = merge(x11)
+    x14 = size(x13)
+    x15 = height(x12)
+    x16 = divide(x14, x15)
+    x17 = uppermost(x12)
+    x18 = lowermost(x12)
+    x19 = rightmost(x12)
+    x20 = subtract(increment(x19), x16)
+    x21 = interval(x17, increment(x18), ONE)
+    x22 = interval(x20, increment(x19), ONE)
+    x23 = product(x21, x22)
+    x24 = cover(I, x13)
+    x25 = fill(x24, x10, x23)
+    return x25

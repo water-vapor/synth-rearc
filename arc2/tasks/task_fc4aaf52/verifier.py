@@ -1,0 +1,31 @@
+from arc2.core import *
+
+
+def verify_fc4aaf52(I: Grid) -> Grid:
+    x0 = objects(I, F, F, T)
+    x1 = first(x0)
+    x2 = palette(x1)
+    x3 = first(x2)
+    x4 = other(x2, x3)
+    x5 = switch(I, x3, x4)
+    x6 = uppermost(x1)
+    x7 = height(x1)
+    x8 = halve(x7)
+    x9 = add(x6, x8)
+    x10 = lbind(greater, x9)
+    x11 = compose(x10, first)
+    x12 = toindices(x1)
+    x13 = sfilter(x12, x11)
+    x14 = compose(flip, x11)
+    x15 = sfilter(x12, x14)
+    x16 = decrement(x9)
+    x17 = matcher(first, x16)
+    x18 = sfilter(x13, x17)
+    x19 = size(x18)
+    x20 = toobject(x13, x5)
+    x21 = toobject(x15, x5)
+    x22 = cover(x5, x1)
+    x23 = shift(x20, (0, x19))
+    x24 = paint(x22, x21)
+    x25 = paint(x24, x23)
+    return x25

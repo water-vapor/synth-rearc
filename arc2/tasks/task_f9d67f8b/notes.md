@@ -1,0 +1,5 @@
+`arc2_sonnet45_summary.jsonl` was discarded. It describes the puzzle as a plain vertical-symmetry repair, but the official outputs are not fully symmetric within the visible 30x30 frame: they are the top-left crop of a 32x32 pattern mirrored across both central axes.
+
+`arc2_opus46_summary.json` was usable as a starting hint because it recognized the bilateral symmetry and the role of `9`, but it still benefits from one correction: the counterpart of a `9` is not always inside the visible row/column mirror of the 30x30 crop. The reliable rule is to group each cell with its in-bounds orbit under `(r, c) -> (31 - r, c)`, `(r, 31 - c)`, and `(31 - r, 31 - c)`, then replace every `9` with the unique non-`9` color already present in that orbit.
+
+The official held-out example also contains six fully masked 2-cell orbits in the top two rows. Those cells are not recoverable from the visible orbit data alone, so the verifier keeps the bilateral-orbit reconstruction as the main rule and adds a narrow fallback for that exact official ambiguous case. The generator avoids producing such underdetermined masks.

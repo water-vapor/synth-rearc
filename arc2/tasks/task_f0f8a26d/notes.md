@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` was discarded for this task. It describes rotating compound rectangular or L-shaped regions around intersections, but the official examples only contain disconnected odd-length horizontal/vertical segments and occasional singleton cells.
+
+`arc2_opus46_summary.json` matched the examples and was used as the working hint. The correct rule is: redraw each foreground component on a blank background after swapping its orientation around the same center cell, so horizontal segments become centered vertical segments of the same length, vertical segments become centered horizontal segments, and singletons stay fixed.

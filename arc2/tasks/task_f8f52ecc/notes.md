@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` was only partly usable, and `arc2_sonnet45_summary.jsonl` was discarded.
+
+The sonnet summary described rectangle filling, which does not match the official examples. The opus summary was closer about using row-major same-color ordering and obstacle-aware turns, but it was still incomplete: the examples do not draw diagonals. For every non-`1`, non-`8` color, the cells are sorted in reading order and each consecutive pair is connected either by a straight row/column segment or by an L-shaped monotone path. When both L-turns are possible, the preferred turn depends on whether the next cell lies to the left or right; `8` cells only force the opposite turn when that preferred route is blocked.
