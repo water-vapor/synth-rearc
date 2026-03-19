@@ -1,0 +1,31 @@
+from arc2.core import *
+
+
+def verify_1990f7a8(I: Grid) -> Grid:
+    x0 = objects(I, T, T, T)
+    x1 = order(x0, uppermost)
+    x2 = first(x1)
+    x3 = last(x1)
+    x4 = remove(x2, x1)
+    x5 = remove(x3, x4)
+    x6 = first(x5)
+    x7 = last(x5)
+    x8 = (x2, x6)
+    x9 = argmin(x8, leftmost)
+    x10 = other(x8, x9)
+    x11 = (x7, x3)
+    x12 = argmin(x11, leftmost)
+    x13 = other(x11, x12)
+    x14 = subgrid(x9, I)
+    x15 = subgrid(x10, I)
+    x16 = subgrid(x12, I)
+    x17 = subgrid(x13, I)
+    x18 = canvas(ZERO, (THREE, ONE))
+    x19 = hconcat(x14, x18)
+    x20 = hconcat(x19, x15)
+    x21 = hconcat(x16, x18)
+    x22 = hconcat(x21, x17)
+    x23 = canvas(ZERO, (ONE, SEVEN))
+    x24 = vconcat(x20, x23)
+    x25 = vconcat(x24, x22)
+    return x25
