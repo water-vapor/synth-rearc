@@ -1,0 +1,30 @@
+from arc2.core import *
+
+
+def verify_dc46ea44(I: Grid) -> Grid:
+    x0 = mostcolor(I)
+    x1 = palette(I)
+    x2 = remove(x0, x1)
+    x3 = remove(FOUR, x2)
+    x4 = remove(SIX, x3)
+    x5 = first(x4)
+    x6 = ofcolor(I, FOUR)
+    x7 = ofcolor(I, SIX)
+    x8 = ofcolor(I, x5)
+    x9 = uppermost(x7)
+    x10 = invert(x9)
+    x11 = astuple(x10, ZERO)
+    x12 = shift(x7, x11)
+    x13 = leftmost(x12)
+    x14 = matcher(last, x13)
+    x15 = sfilter(x12, x14)
+    x16 = first(x15)
+    x17 = lrcorner(x8)
+    x18 = subtract(x16, x17)
+    x19 = shift(x8, x18)
+    x20 = shape(I)
+    x21 = canvas(x0, x20)
+    x22 = fill(x21, FOUR, x6)
+    x23 = fill(x22, SIX, x12)
+    x24 = fill(x23, x5, x19)
+    return x24

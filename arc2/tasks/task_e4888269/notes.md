@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` and `arc2_opus46_summary.json` were useful as a starting point but incorrect in one important way: the table is not a simple functional map whose colors should be followed to a terminal descendant.
+
+The official examples are consistent with ordered sequential substitutions. Read the 2-column strip from top to bottom as a program of `a -> b` replacements. Apply each replacement in order to the target side of the grid, while keeping the strip itself and the separator structure unchanged. This is why the large example can contain repeated left-hand colors such as `7 -> 9` and later `7 -> 8`: a starting `7` becomes `2` through `7 -> 9 -> 2`, while a starting `6` becomes `8` through `6 -> 7 -> 8`.

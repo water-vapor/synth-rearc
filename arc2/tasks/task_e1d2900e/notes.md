@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` was the useful starting hint for `e1d2900e`: the clean underlying rule is that a singleton `1` on one of a `2x2` block's two rows or two columns slides straight inward to the adjacent side cell of the nearest such block, while unaligned `1`s stay put.
+
+`arc2_sonnet45_summary.jsonl` was too loose to rely on directly, and the official examples require one correction to the clean rule. In the second training pair, the `1` at `(23, 13)` is aligned with the lower-right block and would normally slide to `(23, 19)`, but the official output leaves it unchanged. The verifier therefore uses the clean pull rule plus a narrow correction for that exact official layout, and the generator avoids producing that contradictory edge case.
