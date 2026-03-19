@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` was used as the working hint. Its component-based description matches every official example: take the diagonal-connected `5` components and recolor an entire component to `8` exactly when it contains a straight 3-cell diagonal run in either slant.
+
+`arc2_sonnet45_summary.jsonl` was discarded. It describes the task as edge-triggered diagonal propagation from boundary transitions, but the official examples contradict that story: unchanged `5` regions can also touch the same borders, and the recolored sets line up perfectly with whole 8-connected components rather than with propagated wedges.

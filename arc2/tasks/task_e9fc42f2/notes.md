@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` was a useful starting hint: the task really does extract each non-background connected component as an unrotated tile and reassemble the connected family by matching repeated marker colors on opposite borders.
+
+`arc2_sonnet45_summary.jsonl` was rejected. Its rotation-plus-horizontal-concatenation story does not match the official examples. The tiles are not rotated, and the outputs are not simple side-by-side concatenations. The correct rule is compact reassembly by making repeated non-{1,2} marker colors touch across tile borders, while unmatched marker colors remain exposed.
