@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` was discarded for this task. It describes arbitrary rectangular block swaps, but the official examples are more specific: each connected object is a fixed four-cell `1` anchor attached to a five-cell plus motif whose center is always color `4`.
+
+The `arc2_opus46_summary.json` hint was consistent with the examples and was used as the starting hypothesis. The corrected rule is: rotate only the non-`1` plus motif by `180°` inside its own `3x3` box, keep the `1` anchor unchanged, then slide the rebuilt object from the anchor side of the grid to the opposite border in the anchor-to-motif direction.

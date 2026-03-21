@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` was discarded for this task. It never converges on the actual rule and instead speculates about column signatures that do not explain the official examples.
+
+`arc2_opus46_summary.json` was only partially correct, so I treated it as a hint and corrected it. The useful part is the latent interpretation: the input is a connected arrangement of four identical `2x2` motifs, and the output redraws that motif in all four corners of a `5x5` grid. The incorrect part is the cell count: the non-square cases have 12 blue cells, not 15, because the second motif is the fixed three-cell `2x2` L-shape `[[0,8],[8,8]]`, not a larger partial square.

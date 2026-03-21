@@ -1,0 +1,3 @@
+I discarded both summary hints as exact rule descriptions.
+
+They were directionally right that larger multicolor templates are copied onto smaller matching anchors, but they missed two important details from the official examples: the matching key is the full monochrome subshape of one template color, not just a shared color label, and in the third training pair the original template drops its unmatched singleton `3` while the copied templates keep it. The Sonnet note also refers to nonexistent “pair 4” and “pair 5”, so I treated both summaries as unreliable and inferred the rule directly from the official grids.

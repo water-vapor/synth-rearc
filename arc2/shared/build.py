@@ -30,6 +30,8 @@ def generate_verified_examples(
     examples: list[dict] = []
     seen = set()
     attempts = 0
+    if spec.max_examples is not None:
+        n_examples = min(n_examples, spec.max_examples)
     max_attempts = max(1000, n_examples * 200)
     while len(examples) < n_examples:
         attempts += 1

@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` had the right high-level idea, but it also hallucinated a fourth training pair. The official task json has 3 training examples and 1 test example, so I treated the summary as a rough hint only.
+
+The corrected rule is: identify the square `2`-bordered boxes, keep each interior motif shape fixed, and rotate the motif colors along the boxes' perimeter order. The robust ordering is the angular order of box centers around the overall box-centroid, which yields `top -> left -> bottom -> right -> top` when there is one top box and naturally extends to the 5-box test case as `top-left -> left -> bottom -> right -> top-right`.

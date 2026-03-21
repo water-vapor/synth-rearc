@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` was kept as the working hypothesis for `d282b262`. Its description matches the official examples: treat each connected non-background component as one multicolor object and slide those objects rightward as far as possible without changing their rows, shapes, or internal colors.
+
+`arc2_sonnet45_summary.jsonl` was rejected. It describes the task as per-row zero removal and right-justification, but that breaks the connected 3x3 and 5x5 checkerboard motifs in the official examples. The real rule preserves whole connected objects rather than compressing each row independently.

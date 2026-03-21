@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` was discarded for this task. It invents a fourth training example that is not present in the official JSON and describes the transformation as copying marked row templates across a section.
+
+The official examples instead show a slot-wise propagation rule on a zero-separated lattice of 4x4 tiles. Each tile has a 2x2 interior. For each interior slot independently, matching non-default colors propagate through default-colored gaps along tile rows and tile columns between repeated endpoints. `arc2_opus46_summary.json` matched that behavior and was used as the starting hypothesis.

@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` was discarded. It describes small filled rectangles and diagonal bridges, but the official examples only contain hollow rectangular outlines, and the added structure is always orthogonal.
+
+`arc2_opus46_summary.json` was useful as a starting point, but it needed one correction: the rooms are not connected by arbitrary nearest links. The official outputs match a minimum spanning tree over pairs of rooms that face each other and whose interior spans overlap on the perpendicular axis. Each selected edge is rendered as a corridor aligned to the overlapping inset span, with wall openings cut into the two joined rooms.

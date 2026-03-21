@@ -22,6 +22,7 @@ class TaskSpec:
     generator: Callable[[float, float], dict]
     verifier: Callable
     reference_task_path: Path | None
+    max_examples: int | None
 
 
 def _normalize_reference_path(module: ModuleType) -> Path | None:
@@ -54,6 +55,7 @@ def load_task_spec(task_name: str) -> TaskSpec:
         generator=getattr(module, "generate"),
         verifier=getattr(module, "verify"),
         reference_task_path=_normalize_reference_path(module),
+        max_examples=getattr(module, "MAX_EXAMPLES", None),
     )
 
 

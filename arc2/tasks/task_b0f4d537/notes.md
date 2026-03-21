@@ -1,0 +1,3 @@
+The summary hints were only partially useful. The key detail they missed is that the smallest nonempty `4`-row on the 7-wide side is the real scaffold: its `4` columns define the one-cell stripe positions, and the gaps between those columns define how the alternating template row must be expanded.
+
+The rows with `4`s at both endpoints are not arbitrary exceptional masks. They are just selectors for the non-base template rows, matched top-to-bottom. The output is therefore built by expanding the most common non-`5` template row everywhere, then replacing the endpoint-marked rows with the expanded non-base template rows in order.

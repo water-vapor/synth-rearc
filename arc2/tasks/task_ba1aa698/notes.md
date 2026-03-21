@@ -1,0 +1,3 @@
+The summary hints were discarded.
+
+They describe the output as an overlay of all motif rows from the input panels, but every official output contains only one motif and it is placed at a new row that does not appear in the input. The consistent rule is to treat the vertical panels as sequential frames of the same panel-sized scene and emit the next frame as a single panel. The border-colored square case in the second official example lands one row farther in the motion direction than plain top-row extrapolation, so the implementation matches the official data by applying that signed border-color adjustment.

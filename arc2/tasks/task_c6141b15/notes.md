@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` was the useful hint here. It correctly identified the two structural roles: one color is a single segment, and the other color is a repeated motif whose centers define the output connections.
+
+`arc2_sonnet45_summary.jsonl` was discarded because it describes the task as a vague pattern swap with optional rotation/reflection. The official examples are stricter than that: the repeated motif shape is preserved exactly, copied onto the two endpoints of the original segment, and the original segment color is redrawn as the union of all straight connections between motif centers.

@@ -1,0 +1,30 @@
+from arc2.core import *
+
+
+def verify_bd5af378(I: Grid) -> Grid:
+    x0 = leastcolor(I)
+    x1 = mostcolor(I)
+    x2 = asindices(I)
+    x3 = corners(x2)
+    x4 = ofcolor(I, x1)
+    x5 = intersection(x3, x4)
+    x6 = first(x5)
+    x7 = lrcorner(x2)
+    x8 = subtract(x7, x6)
+    x9 = sign(subtract(x6, x8))
+    x10 = add(x8, x9)
+    x11 = connect(x8, astuple(x8[0], x7[1] - x8[1]))
+    x12 = connect(x8, astuple(x7[0] - x8[0], x8[1]))
+    x13 = combine(x11, x12)
+    x14 = connect(x10, astuple(x10[0], x7[1] - x8[1]))
+    x15 = connect(x10, astuple(x7[0] - x8[0], x10[1]))
+    x16 = combine(x14, x15)
+    x17 = add(x10, x9)
+    x18 = intersection(shoot(x17, x9), x2)
+    x19 = canvas(EIGHT, shape(I))
+    x20 = fill(x19, x1, x13)
+    x21 = fill(x20, x0, x16)
+    x22 = fill(x21, EIGHT, initset(x8))
+    x23 = fill(x22, EIGHT, initset(x10))
+    x24 = fill(x23, x1, x18)
+    return x24
