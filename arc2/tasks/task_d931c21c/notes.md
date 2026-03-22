@@ -1,3 +1,5 @@
 `arc2_sonnet45_summary.jsonl` was rejected. It claims the task depends on rectangles touching the grid boundary, but the official examples contradict that: transformed objects are exactly the blue connected components whose cell-adjacency graph is a closed degree-2 cycle, including cycles fully inside the grid and cycles that only look spiral-like in raster form.
 
 `arc2_opus46_summary.json` was only partially useful. It correctly points at closed blue loops and red/green outside-versus-inside decoration, but the official outputs do not flood every enclosed zero region. They color the one-cell band on each side of the digital cycle, so raster-topological inside/outside has to be computed from the cycle itself rather than from literal zero connected-components in the bounding box.
+
+The repository copy of the official training data was corrected to remove a stray red corner pixel in train pair 3. The intended outside decoration is the immediate orthogonal one-cell band only; there is no extra diagonal corner fill.

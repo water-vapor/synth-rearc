@@ -191,28 +191,6 @@ def _interior_cells_d931c21c(
     return frozenset(x22)
 
 
-def _corner_outbox_cells_d931c21c(
-    patch: Patch,
-) -> Indices:
-    x0 = _as_local_patch_d931c21c(patch)
-    x1, x2 = shape(x0)
-    x3 = set()
-    x4 = (
-        ((ZERO, ZERO), ((ZERO, ZERO), (ZERO, ONE), (ONE, ZERO), (ONE, ONE)), (-ONE, -ONE)),
-        ((ZERO, decrement(x2)), ((ZERO, subtract(x2, TWO)), (ZERO, decrement(x2)), (ONE, subtract(x2, TWO)), (ONE, decrement(x2))), (-ONE, x2)),
-        ((decrement(x1), ZERO), ((subtract(x1, TWO), ZERO), (subtract(x1, TWO), ONE), (decrement(x1), ZERO), (decrement(x1), ONE)), (x1, -ONE)),
-        ((decrement(x1), decrement(x2)), ((subtract(x1, TWO), subtract(x2, TWO)), (subtract(x1, TWO), decrement(x2)), (decrement(x1), subtract(x2, TWO)), (decrement(x1), decrement(x2))), (x1, x2)),
-    )
-    for x5, x6, x7 in x4:
-        x8 = tuple(x9 in x0 for x9 in x6)
-        if sum(x8) != THREE:
-            continue
-        if x5 in x0:
-            continue
-        x3.add(x7)
-    return frozenset(x3)
-
-
 def cycle_bands_d931c21c(
     patch: Patch,
 ) -> Tuple:
@@ -221,5 +199,4 @@ def cycle_bands_d931c21c(
     x2 = mapply(neighbors, x0)
     x3 = intersection(x1, x2)
     x4 = difference(x2, x3)
-    x5 = combine(x4, _corner_outbox_cells_d931c21c(x0))
-    return x3, x5
+    return x3, x4
