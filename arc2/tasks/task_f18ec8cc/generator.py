@@ -8,12 +8,6 @@ ACTIVE_COLORS_F18EC8CC = difference(interval(ONE, TEN, ONE), frozenset({SIX}))
 STRIP_COUNT_POOL_F18EC8CC = (THREE, THREE, THREE, FOUR, FOUR)
 
 
-def _ascending_colors_f18ec8cc(
-    colors: tuple[Integer, ...],
-) -> Boolean:
-    return all(colors[x0] < colors[x0 + ONE] for x0 in range(len(colors) - ONE))
-
-
 def _sample_widths_f18ec8cc(
     strip_count: Integer,
     total_width: Integer,
@@ -35,13 +29,8 @@ def _sample_widths_f18ec8cc(
 def _sample_colors_f18ec8cc(
     strip_count: Integer,
 ) -> tuple[Integer, ...]:
-    x0 = choice((T, F, F, F))
-    x1 = tuple(sample(ACTIVE_COLORS_F18EC8CC, strip_count))
-    if x0:
-        return tuple(sorted(x1))
-    while _ascending_colors_f18ec8cc(x1):
-        x1 = tuple(sample(ACTIVE_COLORS_F18EC8CC, strip_count))
-    return x1
+    x0 = tuple(sample(ACTIVE_COLORS_F18EC8CC, strip_count))
+    return x0
 
 
 def _noise_columns_f18ec8cc(
@@ -96,7 +85,7 @@ def generate_f18ec8cc(
         x9 = apply(first, x8)
         if x9 != x5:
             continue
-        x10 = branch(_ascending_colors_f18ec8cc(x9), tuple(reversed(x8)), x8[1:] + x8[:1])
+        x10 = x8[1:] + x8[:1]
         x11 = apply(last, x10)
         x12 = concat_strips_f18ec8cc(x11)
         if equality(x7, x12):
