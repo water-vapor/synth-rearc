@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` was discarded: it describes generic rectangular zones marked by `6`s, which does not fit the official examples.
+
+`arc2_opus46_summary.json` was only partially usable. The recurring `6`-mask idea is correct, but the source template is not always the pure `3x3` `4/6` block, and the copied yellow cells are not always "all non-6 cells" of that pure block. Training example 3 only works if the operative template is the mixed `3x3` subwindow `((1,0,0),(4,6,6),(6,4,4))`, so the actual rule is: select the best recurring mixed `3x3` template, then copy that template's existing `4` positions onto every rotated/reflected match of its `6` positions.

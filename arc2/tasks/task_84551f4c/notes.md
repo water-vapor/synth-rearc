@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` was the useful hint: the active structure is a left-to-right chain of solid vertical bars whose next column starts exactly `height` cells to the right of the previous one, and every such chain seeded by a `1` is laid onto the bottom row.
+
+`arc2_sonnet45_summary.jsonl` was too coarse for the larger examples. Its "segment from one `1` to the next `1`" description misses the real stopping condition: in the official task a chain can stop before the next `1` if the spacing no longer matches the current bar height, and it can continue through multiple `2` bars while that arithmetic spacing keeps holding.

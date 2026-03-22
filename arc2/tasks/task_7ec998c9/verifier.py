@@ -1,0 +1,30 @@
+from arc2.core import *
+
+
+def verify_7ec998c9(I: Grid) -> Grid:
+    x0 = leastcolor(I)
+    x1 = ofcolor(I, x0)
+    x2 = ulcorner(x1)
+    x3 = last(x2)
+    x4 = height(I)
+    x5 = width(I)
+    x6 = decrement(x4)
+    x7 = decrement(x5)
+    x8 = astuple(ZERO, x3)
+    x9 = astuple(x6, x3)
+    x10 = connect(x8, x9)
+    x11 = astuple(ZERO, x7)
+    x12 = astuple(x6, ZERO)
+    x13 = astuple(x6, x7)
+    x14 = double(x3)
+    x15 = equality(x14, x7)
+    x16 = branch(x15, x8, ORIGIN)
+    x17 = branch(x15, x11, x8)
+    x18 = connect(x16, x17)
+    x19 = branch(x15, x12, x9)
+    x20 = branch(x15, x9, x13)
+    x21 = connect(x19, x20)
+    x22 = underfill(I, ONE, x10)
+    x23 = underfill(x22, ONE, x18)
+    x24 = underfill(x23, ONE, x21)
+    return x24

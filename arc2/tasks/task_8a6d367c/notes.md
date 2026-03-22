@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` was rejected for this task. It claims the transformation rotates the framed rectangle, but the training pairs do not support that: the output interior is a block-upscaled copy of one top hint silhouette, not a rotation of the partial fill already inside the frame.
+
+The `arc2_opus46_summary.json` hint was consistent with the examples and was used as a starting hypothesis. The corrected rule is: locate the hollow frame, read its border color and interior fill color, then find the unique top hint shape whose upscaled silhouette can contain the currently filled interior cells as a subset. Recolor that hint with the frame’s fill color, upscale it to the frame’s interior size, and place it inside the extracted frame.

@@ -1,0 +1,31 @@
+from arc2.core import *
+
+
+def verify_7d18a6fb(I: Grid) -> Grid:
+    x0 = objects(I, T, T, T)
+    x1 = colorfilter(x0, ONE)
+    x2 = argmax(x1, size)
+    x3 = inbox(x2)
+    x4 = ulcorner(x3)
+    x5 = urcorner(x3)
+    x6 = llcorner(x3)
+    x7 = lrcorner(x3)
+    x8 = index(I, x4)
+    x9 = index(I, x5)
+    x10 = index(I, x6)
+    x11 = index(I, x7)
+    x12 = argmax(colorfilter(x0, x8), size)
+    x13 = argmax(colorfilter(x0, x9), size)
+    x14 = argmax(colorfilter(x0, x10), size)
+    x15 = argmax(colorfilter(x0, x11), size)
+    x16 = canvas(ZERO, THREE_BY_THREE)
+    x17 = paint(x16, asobject(subgrid(x12, I)))
+    x18 = paint(x16, asobject(subgrid(x13, I)))
+    x19 = paint(x16, asobject(subgrid(x14, I)))
+    x20 = paint(x16, asobject(subgrid(x15, I)))
+    x21 = canvas(ZERO, (SEVEN, SEVEN))
+    x22 = paint(x21, asobject(x17))
+    x23 = paint(x22, shift(asobject(x18), (ZERO, FOUR)))
+    x24 = paint(x23, shift(asobject(x19), (FOUR, ZERO)))
+    x25 = paint(x24, shift(asobject(x20), (FOUR, FOUR)))
+    return x25

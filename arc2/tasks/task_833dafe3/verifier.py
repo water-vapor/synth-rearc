@@ -1,0 +1,9 @@
+from arc2.core import *
+
+
+def verify_833dafe3(I: Grid) -> Grid:
+    x0 = vmirror(I)
+    x1 = hconcat(x0, I)
+    x2 = hmirror(x1)
+    x3 = vconcat(x2, x1)
+    return x3

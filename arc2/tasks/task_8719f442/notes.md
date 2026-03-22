@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` was useful as a starting hint because it correctly identified the 5x5 lattice of 3x3 blocks and the two block types: solid foreground blocks and copies of the original motif.
+
+`arc2_sonnet45_summary.jsonl` was discarded. It describes the output as if there were a fixed set of replica placements, but the examples show a simpler local rule: each foreground cell produces one solid block at its shifted block position, and it produces one or two motif copies in the outward block directions indicated by that cell's displacement from the input center.
