@@ -1,10 +1,10 @@
 from arc2.core import *
 
 
-def _arm_patch_705a3229(
+def _corner_dirs_705a3229(
     loc: tuple[int, int],
     dims: tuple[int, int],
-) -> frozenset[tuple[int, int]]:
+) -> tuple[tuple[int, int], tuple[int, int]]:
     h, w = dims
     i = first(loc)
     j = last(loc)
@@ -12,6 +12,14 @@ def _arm_patch_705a3229(
     right = subtract(decrement(w), j)
     vdir = branch(greater(i, bottom), DOWN, UP)
     hdir = branch(greater(j, right), RIGHT, LEFT)
+    return (vdir, hdir)
+
+
+def _arm_patch_705a3229(
+    loc: tuple[int, int],
+    dims: tuple[int, int],
+) -> frozenset[tuple[int, int]]:
+    vdir, hdir = _corner_dirs_705a3229(loc, dims)
     return combine(shoot(loc, vdir), shoot(loc, hdir))
 
 
@@ -36,14 +44,26 @@ def generate_705a3229(
         cols = [j for j in range(ONE, w - ONE) if double(j) != decrement(w)]
         if len(rows) == ZERO or len(cols) == ZERO:
             continue
+        corner_candidates = {
+            (UP, LEFT): [],
+            (UP, RIGHT): [],
+            (DOWN, LEFT): [],
+            (DOWN, RIGHT): [],
+        }
+        for i in rows:
+            for j in cols:
+                loc = (i, j)
+                corner_candidates[_corner_dirs_705a3229(loc, (h, w))].append(loc)
         seed_colors = sample(colors, n_seeds)
+        # Official examples use at most one seed per corner orientation.
+        chosen_corners = sample(tuple(corner_candidates.keys()), n_seeds)
         gi = canvas(ZERO, (h, w))
         go = gi
         seed_guard = frozenset()
         path_guard = frozenset()
         ok = T
-        for color_value in seed_colors:
-            candidates = [(i, j) for i in rows for j in cols]
+        for color_value, corner_key in zip(seed_colors, chosen_corners):
+            candidates = list(corner_candidates[corner_key])
             shuffle(candidates)
             placed = F
             for loc in candidates:

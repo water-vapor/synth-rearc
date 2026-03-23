@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` was discarded for this task. It treats the sparse plus object as a generic set of "isolated pixels" that move into larger blocks, but the official examples are more specific: there is exactly one non-solid 5-cell plus, and the destination objects are solid filled squares whose centers are recolored.
+
+`arc2_opus46_summary.json` was a useful starting point, but it needed one correction. The examples do not show arbitrary odd-by-odd rectangles; they show odd-sized filled squares. The corrected rule is: find the unique non-solid plus-shaped template, recolor the centers of every odd-sized filled square with the template color, and erase the original plus only when there are fewer than five qualifying squares.

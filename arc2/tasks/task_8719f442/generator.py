@@ -7,7 +7,7 @@ INPUT_DIMS_8719F442 = (THREE, THREE)
 INPUT_CENTER_8719F442 = (ONE, ONE)
 CELL_COUNT_BOUNDS_8719F442 = (THREE, FIVE)
 CELL_OPTIONS_8719F442 = tuple(product(interval(ZERO, THREE, ONE), interval(ZERO, THREE, ONE)))
-FOREGROUND_OPTIONS_8719F442 = remove(ZERO, interval(ZERO, TEN, ONE))
+FOREGROUND_COLOR_8719F442 = FIVE
 
 
 def generate_8719f442(
@@ -15,7 +15,7 @@ def generate_8719f442(
     diff_ub: float,
 ) -> dict:
     while True:
-        x0 = choice(FOREGROUND_OPTIONS_8719F442)
+        x0 = FOREGROUND_COLOR_8719F442
         x1 = unifint(diff_lb, diff_ub, CELL_COUNT_BOUNDS_8719F442)
         x2 = sample(CELL_OPTIONS_8719F442, x1)
         if all(equality(x3, INPUT_CENTER_8719F442) for x3 in x2):

@@ -5,7 +5,7 @@ from arc2.core import *
 
 PALETTE_80214E03 = (ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE)
 MERGE_COUNTS_80214E03 = (ZERO, ZERO, ONE, ONE, TWO, TWO, THREE)
-HOLE_COUNTS_80214E03 = (ZERO, ONE, ONE, TWO, TWO, THREE, THREE, FOUR)
+HOLE_COUNTS_80214E03 = (ZERO, ONE, ONE, TWO, TWO, THREE, THREE, FOUR, FOUR, FIVE)
 
 
 def _sample_spans(
@@ -226,18 +226,16 @@ def generate_80214e03(
             right = col_starts[c1] + col_widths[c1] - ONE
             patch = frozenset((i, j) for i in range(top, bottom + ONE) for j in range(left, right + ONE))
             gi = fill(gi, colors[region_id], patch)
-            inner = tuple(
+            candidates = tuple(
                 (i, j)
-                for i in range(top + ONE, bottom)
-                for j in range(left + ONE, right)
+                for i in range(top, bottom + ONE)
+                for j in range(left, right + ONE)
             )
-            if len(inner) == ZERO:
-                continue
-            max_holes = min(len(inner) // THREE, max(ONE, len(patch) // SIX))
+            max_holes = min(len(candidates) // FOUR, max(ONE, len(patch) // FIVE))
             if max_holes <= ZERO:
                 continue
             target_holes = min(choice(HOLE_COUNTS_80214E03), max_holes)
-            holes = _sparse_points(inner, target_holes)
+            holes = _sparse_points(candidates, target_holes)
             if len(holes) == ZERO:
                 continue
             gi = fill(gi, ZERO, holes)
