@@ -1,0 +1,32 @@
+from synth_rearc.core import *
+
+
+def verify_db118e2a(I: Grid) -> Grid:
+    x0 = trim(I)
+    x1 = asindices(x0)
+    x2 = ofcolor(x0, SEVEN)
+    x3 = difference(x1, x2)
+    x4 = center(x3)
+    x5 = subtract(x4, UNITY)
+    x6 = crop(x0, x5, THREE_BY_THREE)
+    x7 = index(I, RIGHT)
+    x8 = astuple(FIVE, FIVE)
+    x9 = canvas(SEVEN, x8)
+    x10 = asindices(x9)
+    x11 = box(x10)
+    x12 = corners(x10)
+    x13 = difference(x11, x12)
+    x14 = fill(x9, x7, x13)
+    x15 = asobject(x6)
+    x16 = shift(x15, UNITY)
+    x17 = paint(x14, x16)
+    x18 = multiply(THREE, FIVE)
+    x19 = astuple(x18, x18)
+    x20 = canvas(SEVEN, x19)
+    x21 = asobject(x17)
+    x22 = shift(x21, TWO_BY_TWO)
+    x23 = paint(x20, x22)
+    x24 = astuple(EIGHT, EIGHT)
+    x25 = shift(x21, x24)
+    x26 = paint(x23, x25)
+    return x26

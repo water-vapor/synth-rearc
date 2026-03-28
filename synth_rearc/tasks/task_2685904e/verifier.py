@@ -1,0 +1,31 @@
+from synth_rearc.core import *
+
+
+def verify_2685904e(I: Grid) -> Grid:
+    x0 = width(I)
+    x1 = crop(I, ORIGIN, (ONE, x0))
+    x2 = colorcount(x1, EIGHT)
+    x3 = frontiers(I)
+    x4 = colorfilter(x3, FIVE)
+    x5 = extract(x4, hline)
+    x6 = uppermost(x5)
+    x7 = add(x6, TWO)
+    x8 = astuple(x7, ZERO)
+    x9 = crop(I, x8, (ONE, x0))
+    x10 = remove(ZERO, palette(x9))
+    x11 = lbind(colorcount, x9)
+    x12 = matcher(x11, x2)
+    x13 = sfilter(x10, x12)
+    x14 = lbind(ofcolor, x9)
+    x15 = fork(recolor, identity, x14)
+    x16 = merge(apply(x15, x13))
+    x17 = decrement(x6)
+    x18 = astuple(x17, ZERO)
+    x19 = shift(x16, x18)
+    x20 = interval(ZERO, x2, ONE)
+    x21 = compose(invert, toivec)
+    x22 = apply(x21, x20)
+    x23 = lbind(shift, x19)
+    x24 = mapply(x23, x22)
+    x25 = paint(I, x24)
+    return x25

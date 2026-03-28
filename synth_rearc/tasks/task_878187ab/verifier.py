@@ -1,0 +1,33 @@
+from synth_rearc.core import *
+
+
+def verify_878187ab(I: Grid) -> Grid:
+    x0 = palette(I)
+    x1 = remove(SEVEN, x0)
+    x2 = totuple(x1)
+    x3 = lbind(colorcount, I)
+    x4 = apply(x3, x2)
+    x5 = minimum(x4)
+    x6 = maximum(x4)
+    x7 = multiply(FOUR, FOUR)
+    x8 = decrement(x7)
+    x9 = canvas(SEVEN, (x7, x7))
+    x10 = subtract(x7, x5)
+    x11 = interval(x10, x7, ONE)
+    x12 = interval(ZERO, x6, ONE)
+    x13 = product(x11, x12)
+    x14 = fill(x9, TWO, x13)
+    x15 = interval(ZERO, x5, ONE)
+    x16 = decrement(x6)
+    x17 = lbind(subtract, x8)
+    x18 = apply(x17, x15)
+    x19 = lbind(subtract, x16)
+    x20 = apply(x19, x15)
+    x21 = pair(x15, x20)
+    x22 = apply(minimum, x21)
+    x23 = apply(x19, x22)
+    x24 = papply(astuple, x18, x22)
+    x25 = papply(astuple, x18, x23)
+    x26 = combine(x24, x25)
+    x27 = fill(x14, FOUR, x26)
+    return x27

@@ -1,0 +1,30 @@
+from synth_rearc.core import *
+
+
+def verify_e99362f0(I: Grid) -> Grid:
+    x0 = frontiers(I)
+    x1 = colorfilter(x0, FOUR)
+    x2 = extract(x1, hline)
+    x3 = extract(x1, vline)
+    x4 = uppermost(x2)
+    x5 = leftmost(x3)
+    x6 = astuple(x4, x5)
+    x7 = crop(I, ORIGIN, x6)
+    x8 = astuple(ZERO, increment(x5))
+    x9 = astuple(x4, subtract(width(I), increment(x5)))
+    x10 = crop(I, x8, x9)
+    x11 = astuple(increment(x4), ZERO)
+    x12 = astuple(subtract(height(I), increment(x4)), x5)
+    x13 = crop(I, x11, x12)
+    x14 = astuple(increment(x4), increment(x5))
+    x15 = crop(I, x14, subtract(shape(I), x14))
+    x16 = canvas(ZERO, shape(x7))
+    x17 = recolor(TWO, ofcolor(x13, TWO))
+    x18 = paint(x16, x17)
+    x19 = recolor(NINE, ofcolor(x10, NINE))
+    x20 = paint(x18, x19)
+    x21 = recolor(SEVEN, ofcolor(x7, SEVEN))
+    x22 = paint(x20, x21)
+    x23 = recolor(EIGHT, ofcolor(x15, EIGHT))
+    x24 = paint(x22, x23)
+    return x24

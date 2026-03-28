@@ -1,0 +1,17 @@
+from .generator import generate_6df30ad6
+from .verifier import verify_6df30ad6
+
+
+TASK_ID = "6df30ad6"
+generate = generate_6df30ad6
+verify = verify_6df30ad6
+REFERENCE_TASK_PATH = "data/official/arc2/training/6df30ad6.json"
+
+__all__ = [
+    "TASK_ID",
+    "REFERENCE_TASK_PATH",
+    "generate",
+    "generate_6df30ad6",
+    "verify",
+    "verify_6df30ad6",
+]

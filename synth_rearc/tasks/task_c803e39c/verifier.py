@@ -1,0 +1,31 @@
+from synth_rearc.core import *
+
+
+def verify_c803e39c(I: Grid) -> Grid:
+    x0 = hsplit(I, FOUR)
+    x1 = first(x0)
+    x2 = last(x0)
+    x3 = remove(x1, x0)
+    x4 = remove(x2, x3)
+    x5 = first(x4)
+    x6 = last(x4)
+    x7 = other(palette(x1), ZERO)
+    x8 = other(palette(x5), ZERO)
+    x9 = other(palette(x6), ZERO)
+    x10 = other(palette(x2), ZERO)
+    x11 = ofcolor(x1, x7)
+    x12 = subgrid(x11, x1)
+    x13 = ofcolor(x5, x8)
+    x14 = subgrid(x13, x5)
+    x15 = ofcolor(x12, x7)
+    x16 = ofcolor(x14, x8)
+    x17 = shape(x12)
+    x18 = lbind(shift, x15)
+    x19 = rbind(multiply, x17)
+    x20 = apply(x19, x16)
+    x21 = mapply(x18, x20)
+    x22 = shape(x14)
+    x23 = multiply(x17, x22)
+    x24 = canvas(x10, x23)
+    x25 = fill(x24, x9, x21)
+    return x25
