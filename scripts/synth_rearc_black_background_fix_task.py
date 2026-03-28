@@ -7,21 +7,23 @@ from pathlib import Path
 
 from synth_rearc_codex_lib import run_codex_task_sync, save_payload
 
+DATASET = "arc1"
+SPLIT = "training"
+LOG_SUFFIX = "_black_background_fix"
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run the synthetic RE-ARC task-generation prompt for a single puzzle id."
+        description="Run the synthetic RE-ARC black-background-fix prompt for a single ARC1 training puzzle id."
     )
     parser.add_argument("puzzle_id", help="Puzzle id, for example 0a1d4ef5.")
-    parser.add_argument("--dataset", choices=("arc1", "arc2"), required=True)
-    parser.add_argument("--split", choices=("training", "evaluation"), required=True)
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     repo_root = Path(__file__).resolve().parents[1]
-    prompt_path = repo_root / "prompts" / "synth_rearc_task_generation.md"
+    prompt_path = repo_root / "prompts" / "synth_rearc_black_background_fix.md"
     puzzle_id = args.puzzle_id
     task_dir = repo_root / "synth_rearc" / "tasks" / f"task_{puzzle_id}"
 
@@ -30,18 +32,18 @@ def main() -> int:
         return 0
 
     payload = run_codex_task_sync(
-        prompt=(
-            "Please do the task stated in "
-            f"`{prompt_path}`, "
-            f"where DATASET is `{args.dataset}`, SPLIT is `{args.split}`, and TASK_ID is `{puzzle_id}`."
-        ),
+        prompt=f"Please do the task stated in `{prompt_path}`, where TASK_ID is `{puzzle_id}`.",
         working_dir=repo_root,
     )
     payload["puzzle_id"] = puzzle_id
-    payload["dataset"] = args.dataset
-    payload["split"] = args.split
+    payload["dataset"] = DATASET
+    payload["split"] = SPLIT
     payload["status"] = "completed"
-    save_payload(repo_root=repo_root, log_stem=puzzle_id, payload=payload)
+    save_payload(
+        repo_root=repo_root,
+        log_stem=f"{puzzle_id}{LOG_SUFFIX}",
+        payload=payload,
+    )
     print(json.dumps(payload, indent=2))
     return 0
 
