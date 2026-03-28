@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` matched the official examples closely, so I used it as the working hint.
+
+`arc2_sonnet45_summary.jsonl` was misleading: it described the task as position-wise consensus across sections, but the examples are better explained as tile normalization. Each square tile is either a mixed majority/minority motif or a minority-only block, with `5` used as corruption/noise and `0` reserved for separators. The output removes all `5`s, turns every tile containing the majority color into a solid majority tile, and turns every minority-only tile into the clean mixed reference motif.

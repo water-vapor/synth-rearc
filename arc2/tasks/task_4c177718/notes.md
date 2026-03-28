@@ -1,0 +1,3 @@
+`arc2_opus46_summary.json` matched the official examples closely enough to use as the starting hypothesis: the output is the 9-row lower section, the lower blue `1` motif stays fixed, and the upper-right third-color motif is stacked against it.
+
+`arc2_sonnet45_summary.jsonl` was too vague to use directly. It describes the red `2` motif as a generic connector and says the third motif is "typically" placed above or below, but the official examples are more specific: the red motif is always one of two T-orientations, and its top-heavy vs bottom-heavy orientation deterministically decides whether the copied third-color motif goes below or above the lower blue motif.

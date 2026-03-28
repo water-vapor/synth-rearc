@@ -1,0 +1,2 @@
+- `arc2_opus46_summary.json` matched the official examples: the output is a single greedy walk that starts at the red `2x2` block and repeatedly connects to the nearest visible aligned blue `2x2` block.
+- `arc2_sonnet45_summary.jsonl` was too broad. It describes a fuller connection network, but the official outputs leave many aligned blue blocks untouched and only draw the one step-by-step chain.

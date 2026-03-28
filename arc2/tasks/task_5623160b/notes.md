@@ -1,0 +1,3 @@
+`arc2_sonnet45_summary.jsonl` was discarded for this task. It claims the puzzle is a 180-degree rotation around the grid center, but the official examples keep the 9-colored framework fixed and instead translate each attached non-9 object straight away from that framework until the object hits the corresponding border.
+
+`arc2_opus46_summary.json` was consistent with the examples and was used as the initial hypothesis. The verifier and generator treat the 9 component as a stationary hub and move each other connected component in the unique outward cardinal direction determined by its contact with the hub.
