@@ -18,7 +18,7 @@ def save_payload(*, repo_root: Path, log_stem: str, payload: dict[str, Any]) -> 
         json.dump(payload, fp, indent=2)
 
 
-async def run_codex_task(*, prompt: str, working_dir: Path) -> dict[str, Any]:
+async def run_codex_task(*, prompt: str, cwd: Path) -> dict[str, Any]:
     from agents.extensions.experimental.codex import Codex, ThreadOptions, TurnOptions
 
     codex = Codex()
@@ -27,7 +27,7 @@ async def run_codex_task(*, prompt: str, working_dir: Path) -> dict[str, Any]:
             model=MODEL,
             model_reasoning_effort=REASONING_EFFORT,
             sandbox_mode="danger-full-access",
-            working_directory=str(working_dir),
+            working_directory=str(cwd),
             skip_git_repo_check=True,
             network_access_enabled=True,
             web_search_mode="live",
@@ -39,13 +39,11 @@ async def run_codex_task(*, prompt: str, working_dir: Path) -> dict[str, Any]:
         TurnOptions(idle_timeout_seconds=IDLE_TIMEOUT_SECONDS),
     )
     return {
-        "working_dir": str(working_dir),
         "prompt": prompt,
-        "thread_id": thread.id,
         "codex_response": turn.final_response,
         "usage": turn.usage.as_dict() if turn.usage is not None else None,
     }
 
 
-def run_codex_task_sync(*, prompt: str, working_dir: Path) -> dict[str, Any]:
-    return asyncio.run(run_codex_task(prompt=prompt, working_dir=working_dir))
+def run_codex_task_sync(*, prompt: str, cwd: Path) -> dict[str, Any]:
+    return asyncio.run(run_codex_task(prompt=prompt, cwd=cwd))

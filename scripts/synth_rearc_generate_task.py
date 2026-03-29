@@ -35,7 +35,7 @@ def main() -> int:
             f"`{prompt_path}`, "
             f"where DATASET is `{args.dataset}`, SPLIT is `{args.split}`, and TASK_ID is `{puzzle_id}`."
         ),
-        working_dir=repo_root,
+        cwd=repo_root,
     )
     payload["puzzle_id"] = puzzle_id
     payload["dataset"] = args.dataset

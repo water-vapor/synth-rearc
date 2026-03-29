@@ -60,10 +60,10 @@ def _find_event(events: list[dict[str, Any]], event_type: str) -> dict[str, Any]
     return None
 
 
-def run_claude_code_task(*, prompt: str, working_dir: Path) -> dict[str, Any]:
-    working_dir = working_dir.resolve()
-    if not working_dir.is_dir():
-        raise ValueError(f"working_dir does not exist or is not a directory: {working_dir}")
+def run_claude_code_task(*, prompt: str, cwd: Path) -> dict[str, Any]:
+    cwd = cwd.resolve()
+    if not cwd.is_dir():
+        raise ValueError(f"cwd does not exist or is not a directory: {cwd}")
 
     command = [
         "claude",
@@ -81,7 +81,7 @@ def run_claude_code_task(*, prompt: str, working_dir: Path) -> dict[str, Any]:
     ]
     completed = subprocess.run(
         command,
-        cwd=working_dir,
+        cwd=cwd,
         check=True,
         capture_output=True,
         text=True,
@@ -96,7 +96,6 @@ def run_claude_code_task(*, prompt: str, working_dir: Path) -> dict[str, Any]:
     final_response = result_event.get("result")
     session_id = result_event.get("session_id") or (init_event or {}).get("session_id")
     return {
-        "working_dir": str(working_dir),
         "prompt": prompt,
         "agent": "claude_code",
         "session_id": session_id,
@@ -138,7 +137,7 @@ def main() -> int:
             split=args.split,
             puzzle_id=puzzle_id,
         ),
-        working_dir=repo_root,
+        cwd=repo_root,
     )
     payload["puzzle_id"] = puzzle_id
     payload["dataset"] = args.dataset

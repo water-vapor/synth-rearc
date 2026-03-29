@@ -33,7 +33,7 @@ def main() -> int:
 
     payload = run_codex_task_sync(
         prompt=f"Please do the task stated in `{prompt_path}`, where TASK_ID is `{puzzle_id}`.",
-        working_dir=repo_root,
+        cwd=repo_root,
     )
     payload["puzzle_id"] = puzzle_id
     payload["dataset"] = DATASET
