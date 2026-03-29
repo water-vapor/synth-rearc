@@ -42,7 +42,7 @@ Do not edit:
    - verify official examples
    - build 1000 generated examples
    - verify generated examples
-6. If any baseline check fails, treat the monolithic task as broken. Abort the fix task, remove any artifacts and task-package files created for this attempt, and append `TASK_ID` to `/home/vapor/projects/realm/re-arc-2/re-arc/data/task_lists/arc1_training_rearc_fail_task_ids.txt`.
+6. If any baseline check fails, treat the monolithic task as broken. Abort the fix task, remove any artifacts and task-package files created for this attempt, and append `TASK_ID` to `data/task_lists/arc1_training_rearc_fail_task_ids.txt`.
 7. Only if the baseline port passes, inspect the official examples and determine whether the official inputs clearly use black (`0`) as background.
 8. Use the baseline `task.json` and preview artifacts from step 5 to determine whether the passing baseline generator regularly emits non-black input backgrounds.
 9. Only if both conditions hold, fix the ported generator so the task keeps black background while staying on-distribution.
