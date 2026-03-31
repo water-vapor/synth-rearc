@@ -1,0 +1,32 @@
+from synth_rearc.core import *
+
+
+def verify_58490d8a(I: Grid) -> Grid:
+    x0 = objects(I, T, T, T)
+    x1 = argmax(x0, size)
+    x2 = backdrop(x1)
+    x3 = cover(I, x2)
+    x4 = objects(x3, T, T, T)
+    x5 = sizefilter(x4, ONE)
+    x6 = difference(x4, x5)
+    x7 = subgrid(x1, I)
+    x8 = objects(x7, T, T, T)
+    x9 = order(x8, ulcorner)
+    x10 = lbind(colorfilter, x6)
+    x11 = chain(size, x10, color)
+    x12 = apply(x11, x9)
+    x13 = pair(x9, x12)
+    x14 = chain(first, ulcorner, first)
+    x15 = chain(last, ulcorner, first)
+    x16 = compose(double, last)
+    x17 = fork(add, x15, x16)
+    x18 = fork(rbind(interval, TWO), x15, x17)
+    x19 = compose(initset, x14)
+    x20 = fork(product, x19, x18)
+    x21 = chain(color, first, identity)
+    x22 = fork(recolor, x21, x20)
+    x23 = apply(x22, x13)
+    x24 = merge(x23)
+    x25 = canvas(ZERO, shape(x7))
+    x26 = paint(x25, x24)
+    return x26

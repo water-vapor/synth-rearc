@@ -1,0 +1,30 @@
+from synth_rearc.core import *
+
+
+def verify_20270e3b(I: Grid) -> Grid:
+    x0 = objects(I, T, F, F)
+    x1 = colorfilter(x0, SEVEN)
+    x2 = ofcolor(I, FOUR)
+    x3 = rbind(shift, DOWN)
+    x4 = compose(toindices, x3)
+    x5 = lbind(intersection, x2)
+    x6 = chain(size, x5, x4)
+    x7 = compose(positive, x6)
+    x8 = extract(x1, x7)
+    x9 = other(x1, x8)
+    x10 = objects(I, T, T, F)
+    x11 = colorfilter(x10, FOUR)
+    x12 = lbind(manhattan, x8)
+    x13 = argmin(x11, x12)
+    x14 = remove(x13, x11)
+    x15 = merge(x14)
+    x16 = ulcorner(x9)
+    x17 = ulcorner(x8)
+    x18 = subtract(x16, x17)
+    x19 = add(x18, UP)
+    x20 = shift(x13, x19)
+    x21 = combine(x15, x20)
+    x22 = normalize(x21)
+    x23 = canvas(ONE, shape(x22))
+    x24 = paint(x23, x22)
+    return x24
